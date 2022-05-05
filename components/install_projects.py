@@ -14,10 +14,10 @@ def install_projects():
             api_url_repository = ""
             page_url_repository = ""
             admin_url_repository = ""
-
+            print("slash: ", folder_path_slash)
             project_name = input('Name project: ')
-            project_path = (user_path + '\\' if name ==
-                            'nt' else '/') + f'{project_name}'
+            project_path = user_path + \
+                f'{folder_path_slash}' + f'{project_name}'
 
             fileValidation = path.exists(project_path)
 
