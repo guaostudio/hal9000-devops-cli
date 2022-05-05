@@ -24,7 +24,7 @@ def generate_key_default():
 
     for private_key in name_ssh:
         print(f'PRIVATE SSH KEY ({private_key}): ')
-        system(f'cat {ssh_path}/{folder_name}/{private_key}')
+        system(f'cat {ssh_path}/{folder_name}/{private_key}.pub')
         print('\n\n\n')
 
 def generate_key_custom():
