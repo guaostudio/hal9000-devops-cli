@@ -5,8 +5,12 @@ import json
 def install_projects():
     user_path = input(
         "Use other path ? (default: /home/user/)") or path.expanduser('~')
+
     resume = "y"
     folder_path_slash = ('\\' if name == 'nt' else '/')
+    data_projects_path = user_path + folder_path_slash + ".deploy" + folder_path_slash + \
+        "deploy_script" + folder_path_slash + "data_projects.json"
+
     try:
         while resume == "y" or resume == "Y":
             system('cls' if name == 'nt' else 'clear')
@@ -14,7 +18,7 @@ def install_projects():
             api_url_repository = ""
             page_url_repository = ""
             admin_url_repository = ""
-            print("slash: ", folder_path_slash)
+
             project_name = input('Name project: ')
             project_path = user_path + \
                 f'{folder_path_slash}' + f'{project_name}'
@@ -31,6 +35,7 @@ def install_projects():
                 api_url_repository = input('Enter api url repository: ')
                 ssh_key_api = input(
                     'Do you have a specific ssh key in your project ? (y/n): ')
+
                 if('y' in ssh_key_api or 'Y' in ssh_key_api):
                     api_url_repository = api_url_repository.replace(
                         'github.com', 'api')
@@ -81,22 +86,22 @@ def install_projects():
                 }]
             }
 
-            fileValidation = path.exists("data_projects.json")
+            fileValidation = path.exists(data_projects_path)
             file = ""
 
             if(fileValidation == False):
-                file = open("data_projects.json", "w")
+                file = open(data_projects_path, "w")
                 file.write(json.dumps(data_project))
                 file.close()
 
             elif(fileValidation == True):
-                with open("data_projects.json", "r") as jsonFile:
+                with open(data_projects_path, "r") as jsonFile:
                     file_data = json.load(jsonFile)
 
                 file_data["projects"] = file_data["projects"] + \
                     data_project["projects"]
 
-                with open("data_projects.json", "w") as jsonFile:
+                with open(data_projects_path, "w") as jsonFile:
                     json.dump(file_data, jsonFile)
 
             resume = input('Do you want repository to other project ? (y/n): ')

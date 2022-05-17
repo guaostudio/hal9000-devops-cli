@@ -1,9 +1,13 @@
 import json
 import os
 
+path_user = os.path.expanduser('~')
+folder_path_slash = ('\\' if os.name == 'nt' else '/')
 
-file_commands = "commands_projects.json"
-data_projects_file = "data_projects.json"
+file_commands = path_user + folder_path_slash + ".deploy" + folder_path_slash + \
+    "deploy_script" + folder_path_slash + "commands_projects.json"
+data_projects_file = path_user + folder_path_slash + ".deploy" + folder_path_slash + \
+    "deploy_script" + folder_path_slash + "data_projects.json"
 
 
 def clearConsole(): return os.system(
