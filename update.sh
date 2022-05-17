@@ -2,4 +2,4 @@
 
 cd ~/.deploy/deploy_script
 git fetch
-git push
+git pull

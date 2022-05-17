@@ -1,7 +1,7 @@
 import os
 
-nginx_multi_config_path = "/home/ubuntu/templates/nginx_multiple_files_config.txt"
-nginx_a_config_path = "/home/ubuntu/templates/nginx_one_file_config.txt"
+nginx_multi_config_path = "/home/ubuntu/.deploy/deploy_script/templates/nginx_multiple_files_config.txt"
+nginx_a_config_path = "/home/ubuntu/.deploy/deploy_script/templates/nginx_one_file_config.txt"
 
 
 def clearConsole(): return os.system(
