@@ -1,5 +1,8 @@
 import os
 
+nginx_multi_config_path = "/home/ubuntu/templates/nginx_multiple_files_config.txt"
+nginx_a_config_path = "/home/ubuntu/templates/nginx_one_file_config.txt"
+
 
 def clearConsole(): return os.system(
     'cls' if os.name in ('nt', 'dos') else 'clear')
@@ -26,7 +29,7 @@ def nginx_config():
             admin_port = input("Enter the port of the admin: ", api_port)
             page_port = input("Enter the port of the page: ", admin_port)
 
-            with open("templates/nginx_one_file_config.txt", "r") as nginx_config_template:
+            with open(nginx_a_config_path, "r") as nginx_config_template:
                 nginx_file = nginx_config_template.read()
 
             nginx_file = nginx_file.replace("{{SERVER_NAME}}", server_name)
@@ -53,14 +56,14 @@ def nginx_config():
                 if file_name == "y" or file_name == "Y":
                     nginx_file = ""
                     server_name = input("Enter the server name: ")
-                    page_port = input("Enter the port of the page: ")
+                    port = input("Enter the port: ")
 
-                    with open("templates/nginx_multiple_files_config.txt", "r") as nginx_config_template:
+                    with open(nginx_multi_config_path, "r") as nginx_config_template:
                         nginx_file = nginx_config_template.read()
 
                     nginx_file = nginx_file.replace(
                         "{{SERVER_NAME}}", server_name)
-                    nginx_file = nginx_file.replace("{{PORT}}", page_port)
+                    nginx_file = nginx_file.replace("{{PORT}}", port)
 
                     with open(f"{file}.{server_name}" + ".conf", "w") as file:
                         file.write(nginx_file)
