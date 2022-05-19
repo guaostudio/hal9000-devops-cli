@@ -10,7 +10,7 @@ from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
 
 load_dotenv()
-HOME_PATH = os.path.expanduser('~')
+HOME_PATH = os.path.expanduser('~') + "/.deploy" + "/CLI"
 
 PATH_DATA = os.getenv('CLI_PATH')
 PATH_DATA = HOME_PATH if PATH_DATA else os.path.dirname(
