@@ -31,7 +31,7 @@ if(len(sys.argv) == 2):
     elif(sys.argv[1] == '--run-project'):
         run_projects(PATH_DATA)
     elif(sys.argv[1] == '--nginx-config'):
-        nginx_config()
+        nginx_config(PATH_DATA)
     elif(sys.argv[1] == '--help'):
         print('\nUsage:')
         print('\t--generate-ssh-key')

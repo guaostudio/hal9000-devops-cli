@@ -1,15 +1,16 @@
 import os
 
-nginx_multi_config_path = "/home/ubuntu/.deploy/deploy_script/templates/nginx_multiple_files_config.txt"
-nginx_a_config_path = "/home/ubuntu/.deploy/deploy_script/templates/nginx_one_file_config.txt"
-
 
 def clearConsole(): return os.system(
     'cls' if os.name in ('nt', 'dos') else 'clear')
 
 
-def nginx_config():
+def nginx_config(PATH_DATA):
     resume = "y"
+
+    folder_path_slash = ('\\' if os.name == 'nt' else '/')
+    nginx_multi_config_path = f"{PATH_DATA}{folder_path_slash}templates{folder_path_slash}nginx_multiple_files_config.txt"
+    nginx_a_config_path = f"{PATH_DATA}{folder_path_slash}templates{folder_path_slash}nginx_one_file_config.txt"
 
     while resume == "y" or resume == "Y":
         print("Generate a new nginx file")
