@@ -105,5 +105,5 @@ def install_projects(PATH_DATA):
 
             resume = input('Do you want repository to other project ? (y/n): ')
         print('Projects installed successfully!')
-    except:
-        print("Error")
+    except Exception as e:
+        print("Error: ", e)

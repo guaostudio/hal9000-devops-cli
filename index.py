@@ -10,9 +10,10 @@ from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
 
 load_dotenv()
+HOME_PATH = os.path.expanduser('~')
 
 PATH_DATA = os.getenv('CLI_PATH')
-PATH_DATA = PATH_DATA if PATH_DATA else os.path.dirname(
+PATH_DATA = HOME_PATH if PATH_DATA else os.path.dirname(
     os.path.realpath(__file__))
 
 
