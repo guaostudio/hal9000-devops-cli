@@ -8,7 +8,7 @@ Python 3.*
 
 ## INSTALLATION
 
-git clone https://github.com/guaostudio/hal9000-devops-cli.git CLI && cd CLI && ./install.sh
+git clone https://github.com/guaostudio/hal9000-devops-cli.git CLI && cd CLI && sh install.sh
 
 ## UPDATE script
 
