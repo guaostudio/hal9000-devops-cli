@@ -1,6 +1,7 @@
 import os
 import sys
 import signal
+import os
 from dotenv import load_dotenv
 
 from components.generate_ssh_keys import generate_key_default
@@ -10,7 +11,9 @@ from components.generate_nginx_configuration import nginx_config
 
 load_dotenv()
 
-OS = os.getenv('OS')
+PATH_DATA = os.getenv('CLI_PATH')
+PATH_DATA = PATH_DATA if PATH_DATA else os.path.dirname(
+    os.path.realpath(__file__))
 
 
 def sigint_handler(signal, frame):
@@ -24,9 +27,9 @@ if(len(sys.argv) == 2):
     if(sys.argv[1] == '--generate-ssh-key'):
         generate_key_default()
     elif(sys.argv[1] == '--install-project'):
-        install_projects()
+        install_projects(PATH_DATA)
     elif(sys.argv[1] == '--run-project'):
-        run_projects()
+        run_projects(PATH_DATA)
     elif(sys.argv[1] == '--nginx-config'):
         nginx_config()
     elif(sys.argv[1] == '--help'):

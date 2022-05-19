@@ -1,7 +1,8 @@
 from os import system, path
 
-name_ssh = ['api','page','admin']
+name_ssh = ['api', 'page', 'admin']
 ssh_path = path.expanduser('~/.ssh')
+
 
 def generate_key_default():
     folder_name = input('Name project: ')
@@ -10,7 +11,8 @@ def generate_key_default():
     system(f'mkdir {ssh_path}/{folder_name}')
     system('eval `ssh-agent -s`')
 
-    if fileValidation == False: system(f'touch {ssh_path}/config && chmod 700 {ssh_path}/config')
+    if fileValidation == False:
+        system(f'touch {ssh_path}/config && chmod 700 {ssh_path}/config')
 
     for key in name_ssh:
         system(f'ssh-keygen -f {ssh_path}/{folder_name}/{key} -P ""')
@@ -26,6 +28,3 @@ def generate_key_default():
         print(f'PRIVATE SSH KEY ({private_key}): ')
         system(f'cat {ssh_path}/{folder_name}/{private_key}.pub')
         print('\n\n\n')
-
-def generate_key_custom():
-    print('hi')

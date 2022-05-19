@@ -2,14 +2,13 @@ from os import system, path, name
 import json
 
 
-def install_projects():
+def install_projects(PATH_DATA):
     user_path = input(
-        "Use other path ? (default: /home/user/)") or path.expanduser('~')
+        "Use other path ? (default: /home/user/): ") or path.expanduser('~')
 
     resume = "y"
     folder_path_slash = ('\\' if name == 'nt' else '/')
-    data_projects_path = user_path + folder_path_slash + ".deploy" + folder_path_slash + \
-        "deploy_script" + folder_path_slash + "data_projects.json"
+    data_projects_path = PATH_DATA + folder_path_slash + "data_projects.json"
 
     try:
         while resume == "y" or resume == "Y":
@@ -21,7 +20,7 @@ def install_projects():
 
             project_name = input('Name project: ')
             project_path = user_path + \
-                f'{folder_path_slash}' + f'{project_name}'
+                folder_path_slash + project_name
 
             fileValidation = path.exists(project_path)
 

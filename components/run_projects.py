@@ -4,19 +4,18 @@ import os
 path_user = os.path.expanduser('~')
 folder_path_slash = ('\\' if os.name == 'nt' else '/')
 
-file_commands = path_user + folder_path_slash + ".deploy" + folder_path_slash + \
-    "deploy_script" + folder_path_slash + "commands_projects.json"
-data_projects_file = path_user + folder_path_slash + ".deploy" + folder_path_slash + \
-    "deploy_script" + folder_path_slash + "data_projects.json"
-
 
 def clearConsole(): return os.system(
     'cls' if os.name in ('nt', 'dos') else 'clear')
 
 
-def run_projects():
+def run_projects(PATH_DATA):
+    file_commands = PATH_DATA + folder_path_slash + "commands_projects.json"
+    data_projects_file = PATH_DATA + folder_path_slash + "data_projects.json"
+
     resume = "y"
     option_status = "off"
+
     while resume == "y" or resume == "Y":
         print("Select a option to continue: ")
         print("1. Add project")
@@ -61,7 +60,8 @@ def run_projects():
         if(option < len(data['projects'])):
             project_name = data['projects'][option]["project_name"]
             commands = get_commands(project_name)
-            get_project_folders(project_name, commands)
+            get_project_folders(project_name, commands,
+                                data_projects_file, file_commands)
         else:
             clearConsole()
 
@@ -93,7 +93,7 @@ def run_projects():
 
         if(option < len(data['projects'])):
             project_name = data['projects'][option]["project_name"]
-            folders_to_init(project_name)
+            folders_to_init(project_name, file_commands)
         else:
             clearConsole()
 
@@ -104,7 +104,7 @@ def run_projects():
             option_status = "off"
 
 
-def get_project_folders(project_name, commands_json):
+def get_project_folders(project_name, commands_json, data_projects, file_commands):
     data = ""
     project_json_commands = {
         "project_name": project_name,
@@ -115,7 +115,7 @@ def get_project_folders(project_name, commands_json):
         }
     }
 
-    with open(data_projects_file, 'r') as f:
+    with open(data_projects, 'r') as f:
         data = json.load(f)
     project = find_project(data['projects'], project_name)
     keys = list(project.keys())
@@ -229,7 +229,7 @@ def get_commands(name_project):
     return commands_json
 
 
-def folders_to_init(project_name):
+def folders_to_init(project_name, file_commands):
     resume = "y"
     while resume == "y" or resume == "Y":
         data = ""
@@ -273,7 +273,8 @@ def folders_to_init(project_name):
                                " && ") if commands['run_project'] != "" else ""
                 additional_command = (
                     commands['additional_command']) if commands['additional_command'] != "" else ""
-
+                print(
+                    f"{folder_path} {install_command} {build_command} {migration_command} {run_command} {additional_command}")
                 os.system(
                     f"{folder_path} {install_command} {build_command} {migration_command} {run_command} {additional_command}")
 
