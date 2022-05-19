@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cd ~/.deploy/deploy_script
+cd ~/.deploy/CLI
 git fetch
 git pull
