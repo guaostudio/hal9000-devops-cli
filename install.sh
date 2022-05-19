@@ -1,8 +1,11 @@
 #!/bin/sh
 
 sudo apt install python3
+pip install -r requirements.txt
 mkdir ~/.deploy
-echo "alias deploy='python3 ~/.deploy/deploy_script/index.py'" >> ~/.bashrc
-echo "alias deploy_update_script='sh ~/.deploy/deploy_script/update.sh'" >> ~/.bashrc
+touch .env
+echo "OS=LINUX" >> .env
+echo "alias deploy='python3 ~/.deploy/CLI/index.py'" >> ~/.bashrc
+echo "alias update_cli='sh ~/.deploy/CLI/update.sh'" >> ~/.bashrc
+mv ~/CLI ~/.deploy
 source ~/.bashrc
-mv ~/deploy_script ~/.deploy

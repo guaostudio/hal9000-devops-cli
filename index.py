@@ -1,9 +1,16 @@
+import os
 import sys
 import signal
-from components.generate_ssh_keys import generate_key_default, generate_key_custom
+from dotenv import load_dotenv
+
+from components.generate_ssh_keys import generate_key_default
 from components.install_projects import install_projects
 from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
+
+load_dotenv()
+
+OS = os.getenv('OS')
 
 
 def sigint_handler(signal, frame):
