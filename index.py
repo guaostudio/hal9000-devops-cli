@@ -16,6 +16,8 @@ PATH_DATA = os.getenv('CLI_PATH')
 PATH_DATA = HOME_PATH if PATH_DATA else os.path.dirname(
     os.path.realpath(__file__))
 
+print("PATH DATA: ", PATH_DATA)
+
 
 def sigint_handler(signal, frame):
     print('\nScript is terminated')
