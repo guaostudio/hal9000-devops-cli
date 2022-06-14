@@ -1,0 +1,28 @@
+{
+  "projects": [{
+    "project_name": "verkko",
+    "project_commands": {
+      "api": {
+        "path": "/home/seigm/verkko/api",
+        "url": "git@api-verkko:guaostudio/verkko-legal-api.git",
+        "commands": {
+          "install_modules": "npm install",
+          "build_project": "",
+          "migration_project": "",
+          "run_project": "npm run server-stage",
+          "additional_command": ""
+        }
+      },
+      "page": {
+        "path": "/home/seigm/verkko/page",
+        "url": "",
+        "commands": {}
+      },
+      "admin": {
+        "path": "/home/seigm/verkko/admin",
+        "url": "",
+        "commands": {}
+      }
+    }
+  }]
+}
