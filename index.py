@@ -8,6 +8,7 @@ from components.generate_ssh_keys import generate_key_default
 from components.install_projects import install_projects
 from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
+from components.info_project import get_info_project
 
 load_dotenv()
 HOME_PATH = os.path.expanduser('~') + "/.deploy" + "/CLI"
@@ -35,6 +36,8 @@ if(len(sys.argv) == 2):
         run_projects(PATH_DATA)
     elif(sys.argv[1] == '--nginx-config'):
         nginx_config(PATH_DATA)
+    elif(sys.argv[1] == '--get-info'):
+        get_info_project(PATH_DATA)
     elif(sys.argv[1] == '--help'):
         print('\nUsage:')
         print('\t--generate-ssh-key')

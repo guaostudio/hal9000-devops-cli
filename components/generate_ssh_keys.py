@@ -7,10 +7,12 @@ permissions = ("" if name == 'nt' else 'sudo')
 
 
 def generate_key_default():
-    print("SSH KEYS")
-    name_ssh = folders_name()
-
     folder_name = input('Name project: ')
+
+    if(folder_name == ''):
+        return print("Name project is empty")
+
+    name_ssh = folders_name()
     fileValidation = path.exists(ssh_path + '/config')
 
     system(f'mkdir {ssh_path}/{folder_name}')
@@ -22,15 +24,17 @@ def generate_key_default():
 
     for key in name_ssh:
         system(f'ssh-keygen -f {ssh_path}/{folder_name}/{key} -P ""')
+
         with open(f'{ssh_path}/config', "a") as config_file:
             config_file.write(f"""
             Host {key}-{folder_name}
                 HostName github.com
                 IdentityFile {ssh_path}/{folder_name}/{key}
             """)
+
         system(f'ssh-add {ssh_path}/{folder_name}/{key}')
 
-    for private_key in name_ssh:
-        print(f'PRIVATE SSH KEY ({private_key}): ')
-        system(f'cat {ssh_path}/{folder_name}/{private_key}.pub')
+    for public_key in name_ssh:
+        print(f'PUBLIC SSH KEY ({public_key}): ')
+        system(f'cat {ssh_path}/{folder_name}/{public_key}.pub')
         print('\n')

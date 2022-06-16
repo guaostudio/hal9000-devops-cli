@@ -22,5 +22,4 @@ def folders_name():
         if continue_add_folders == "n" or continue_add_folders == "N":
             other = "n"
 
-    print("Folders: ", folders)
     return folders
