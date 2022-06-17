@@ -18,7 +18,7 @@ DATA PROJECTS PATH: {data_projects_path}
         data_project += f"\nPROJECTS: You don't have any project"
         return print(data_project)
     else:
-        data_project += f"\nPROJECTS:\n"
+        data_project += f"\nPROJECTS:"
 
     with open(data_projects_path, "r") as jsonFile:
         file_data = json.load(jsonFile)

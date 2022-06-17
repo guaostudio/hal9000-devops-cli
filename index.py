@@ -17,8 +17,6 @@ PATH_DATA = os.getenv('CLI_PATH')
 PATH_DATA = HOME_PATH if PATH_DATA else os.path.dirname(
     os.path.realpath(__file__))
 
-print("PATH DATA: ", PATH_DATA)
-
 
 def sigint_handler(signal, frame):
     print('\nScript is terminated')
@@ -36,7 +34,7 @@ if(len(sys.argv) == 2):
         run_projects(PATH_DATA)
     elif(sys.argv[1] == '--nginx-config'):
         nginx_config(PATH_DATA)
-    elif(sys.argv[1] == '--get-info'):
+    elif(sys.argv[1] == '--info'):
         get_info_project(PATH_DATA)
     elif(sys.argv[1] == '--help'):
         print('\nUsage:')
@@ -45,7 +43,10 @@ if(len(sys.argv) == 2):
         print('\t--run-project')
         print('\t--nginx-config')
         print('\t--help')
+        print('\t--info')
         print('\n')
+    else:
+        print('Command is not valid \nUse --help for more information')
 else:
     print('\nUsage:')
     print('\t--generate-ssh-key')
