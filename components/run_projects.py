@@ -1,6 +1,8 @@
 import json
 import os
 
+from helpers.run_command_project import run_command_project
+
 path_user = os.path.expanduser('~')
 folder_path_slash = ('\\' if os.name == 'nt' else '/')
 
@@ -231,68 +233,50 @@ def get_commands(name_project):
 
 def folders_to_init(project_name, file_commands):
     resume = "y"
+
     while resume == "y" or resume == "Y":
         data = ""
         values_remove = []
 
         with open(file_commands, 'r') as f:
             data = json.load(f)
+
         project = find_project(data['projects'], project_name)
         keys = list(project['project_commands'].keys())
+
         clearConsole()
+
         for x in keys:
             if(len((project['project_commands'][x]['commands']).keys()) == 0):
                 values_remove.append(x)
+
         for value_to_delete in values_remove:
             keys.remove(value_to_delete)
+
         for idx, x in enumerate(keys):
             print(f'{idx}.- {x}')
+
         print("\n98.- All")
         print("99.- Exit\n")
 
         folder_init = int(input("Select project to init: "))
-        if(folder_init == 99):
+
+        if(folder_init == 98):
+            for x in keys:
+                project_data = project['project_commands'][x]
+                commands = project_data['commands']
+                run_command_project(project_data['path'], commands)
+                print("All repositories is running")
+
+        elif(folder_init == 99):
             resume = "n"
             return
 
         if(folder_init < len(keys)):
             project_data = project['project_commands'][keys[folder_init]]
-            print(project_data)
             commands = project_data['commands']
+            run_command_project(project_data['path'], commands)
 
-            if(keys[folder_init] == "api"):
-                folder_path = ("cd " +
-                               project_data['path'] + " &&") if commands['install_modules'] != "" else ""
-                install_command = (
-                    commands['install_modules'] + " &&") if commands['install_modules'] != "" else ""
-                build_command = (
-                    commands['build_project'] + " &&") if commands['build_project'] != "" else ""
-                migration_command = (
-                    commands['migration_project'] + " &&") if commands['migration_project'] != "" else ""
-                run_command = (commands['run_project']
-                               ) if commands['run_project'] != "" else ""
-                additional_command = (
-                    " && " + commands['additional_command']) if commands['additional_command'] != "" else ""
-                print(
-                    f"{folder_path} {install_command} {build_command} {migration_command} {run_command} {additional_command}")
-                os.system(
-                    f"{folder_path} {install_command} {build_command} {migration_command} {run_command} {additional_command}")
-
-            elif(keys[folder_init] == "page" or keys[folder_init] == "admin"):
-                folder_path = (
-                    "cd " + project_data['path'] + " &&") if commands['install_modules'] != "" else ""
-                install_command = (
-                    commands['install_modules'] + "&&") if commands['install_modules'] != "" else ""
-                build_command = (
-                    commands['build_project'] + "&&") if commands['build_project'] != "" else ""
-                run_command = (commands['run_project']
-                               ) if commands['run_project'] != "" else ""
-                additional_command = (
-                    " && " + commands['additional_command']) if commands['additional_command'] != "" else ""
-                os.system(
-                    f"{folder_path} {install_command} {build_command} {run_command} {additional_command}")
-        else:
-            clearConsole()
         continue_add_projects = input(
             "do you want to continue with other projects? (y/n): ")
         if(continue_add_projects == "n" or continue_add_projects == "N"):

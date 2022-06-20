@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "project_name": "nest-next-test",
+      "project_commands": {
+        "api": {
+          "path": "D:\\TEST\\nest-next-test\\api",
+          "url": "git@github.com:SelimMontero/nest-next-test.git",
+          "commands": {
+            "install_modules": "npm install",
+            "build_project": "npm run build",
+            "migration_project": "npm run migrate ",
+            "run_project": "npm run dev",
+            "additional_command": ""
+          }
+        },
+        "page": {
+          "path": "D:\\TEST\\nest-next-test\\page",
+          "url": "",
+          "commands": {
+            "install_modules": "npm install",
+            "build_project": "npm run build",
+            "run_project": "npm run dev",
+            "additional_command": ""
+          }
+        },
+        "admin": {
+          "path": "D:\\TEST\\nest-next-test\\admin",
+          "url": "",
+          "commands": {
+            "install_modules": "npm install",
+            "build_project": "npm run dev",
+            "run_project": "npm run dev",
+            "additional_command": ""
+          }
+        }
+      }
+    }
+  ]
+}
