@@ -8,8 +8,7 @@ def get_info_project(home_path):
     dash = ('-' * 50)
 
     fileValidation = path.exists(data_projects_path)
-    data_project = f"""
-    INFO
+    data_project = f"""         INFO\n
 HOME PATH: {home_path}
 COMMANDS PATH: {home_path + folder_path_slash + "commands"}
 DATA PROJECTS PATH: {data_projects_path}
