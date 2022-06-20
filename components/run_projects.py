@@ -1,7 +1,7 @@
 import json
 import os
 
-from helpers.run_command_project import run_command_project
+from .helpers.run_command_project import run_command_project
 
 path_user = os.path.expanduser('~')
 folder_path_slash = ('\\' if os.name == 'nt' else '/')
