@@ -37,7 +37,7 @@ def install_projects(PATH_DATA):
 
                 if('y' in ssh_key_api or 'Y' in ssh_key_api):
                     api_url_repository = api_url_repository.replace(
-                        'github.com', 'api')
+                        'github.com', f'api-{project_name}')
                 system(
                     f'cd {project_path} && git clone {api_url_repository} api')
 
