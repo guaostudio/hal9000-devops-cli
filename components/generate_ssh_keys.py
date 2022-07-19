@@ -6,7 +6,7 @@ ssh_path = path.expanduser('~/.ssh')
 permissions = ("" if name == 'nt' else 'sudo')
 
 
-def generate_key_default():
+def generate_ssh_key():
     folder_name = input('Name project: ')
 
     if(folder_name == ''):
@@ -36,5 +36,6 @@ def generate_key_default():
 
     for public_key in name_ssh:
         print(f'PUBLIC SSH KEY ({public_key}): ')
+        print(f'SSH KEY => {key}-{folder_name}')
         system(f'cat {ssh_path}/{folder_name}/{public_key}.pub')
         print('\n')

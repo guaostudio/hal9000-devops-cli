@@ -4,7 +4,7 @@ import signal
 import os
 from dotenv import load_dotenv
 
-from components.generate_ssh_keys import generate_key_default
+from components.generate_ssh_keys import generate_ssh_key
 from components.install_projects import install_projects
 from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
@@ -23,11 +23,16 @@ def sigint_handler(signal, frame):
     sys.exit(0)
 
 
+print("data: ", sys.argv, "len: ", len(sys.argv))
+
 signal.signal(signal.SIGINT, sigint_handler)
 
-if(len(sys.argv) == 2):
+if(len(sys.argv) >= 2):
     if(sys.argv[1] == '--generate-ssh-key'):
-        generate_key_default()
+        if(len(sys.argv) == 6):
+            print("data2:", sys.argv)
+        else:
+            generate_ssh_key()
     elif(sys.argv[1] == '--install-project'):
         install_projects(PATH_DATA)
     elif(sys.argv[1] == '--run-project'):
