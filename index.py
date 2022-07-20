@@ -10,6 +10,8 @@ from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
 from components.info_project import get_info_project
 
+from components.helpers.handle_errors import handle_parameters_errors
+
 load_dotenv()
 HOME_PATH = os.path.expanduser('~') + "/.deploy" + "/CLI"
 
@@ -23,16 +25,13 @@ def sigint_handler(signal, frame):
     sys.exit(0)
 
 
-print("data: ", sys.argv, "len: ", len(sys.argv))
-
 signal.signal(signal.SIGINT, sigint_handler)
 
 if(len(sys.argv) >= 2):
     if(sys.argv[1] == '--generate-ssh-key'):
-        if(len(sys.argv) == 6):
-            print("data2:", sys.argv)
-        else:
-            generate_ssh_key()
+        ssh_handle_errors = handle_parameters_errors("ssh_key", sys.argv[1:])
+        if(ssh_handle_errors["success"] == True):
+            generate_ssh_key(ssh_handle_errors["data"])
     elif(sys.argv[1] == '--install-project'):
         install_projects(PATH_DATA)
     elif(sys.argv[1] == '--run-project'):
