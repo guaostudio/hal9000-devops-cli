@@ -50,7 +50,7 @@ def install_projects(PATH_DATA):
                     'Do you have a specific ssh key in your project ? (y/n): ')
                 if('y' in ssh_key_page or 'Y' in ssh_key_page):
                     page_url_repository = page_url_repository.replace(
-                        'github.com', 'page')
+                        'github.com', f'page-{project_name}')
                 system(
                     f'cd {project_path} && git clone {page_url_repository} page')
 
@@ -63,7 +63,7 @@ def install_projects(PATH_DATA):
                     'Do you have a specific ssh key in your project ? (y/n): ')
                 if('y' in ssh_key_admin or 'Y' in ssh_key_admin):
                     admin_url_repository = admin_url_repository.replace(
-                        'github.com', 'admin')
+                        'github.com', f'admin-{project_name}')
                 system(
                     f'cd {project_path} && git clone {admin_url_repository} admin')
 

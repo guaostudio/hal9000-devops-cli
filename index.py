@@ -4,11 +4,13 @@ import signal
 import os
 from dotenv import load_dotenv
 
-from components.generate_ssh_keys import generate_key_default
+from components.generate_ssh_keys import generate_ssh_key
 from components.install_projects import install_projects
 from components.run_projects import run_projects
 from components.generate_nginx_configuration import nginx_config
 from components.info_project import get_info_project
+
+from components.helpers.handle_errors import handle_parameters_errors
 
 load_dotenv()
 HOME_PATH = os.path.expanduser('~') + "/.deploy" + "/CLI"
@@ -25,9 +27,11 @@ def sigint_handler(signal, frame):
 
 signal.signal(signal.SIGINT, sigint_handler)
 
-if(len(sys.argv) == 2):
+if(len(sys.argv) >= 2):
     if(sys.argv[1] == '--generate-ssh-key'):
-        generate_key_default()
+        ssh_handle_errors = handle_parameters_errors("ssh_key", sys.argv[1:])
+        if(ssh_handle_errors["success"] == True):
+            generate_ssh_key(ssh_handle_errors["data"])
     elif(sys.argv[1] == '--install-project'):
         install_projects(PATH_DATA)
     elif(sys.argv[1] == '--run-project'):
