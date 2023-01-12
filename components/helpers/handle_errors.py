@@ -3,6 +3,11 @@ cli_commands = [
         "name": "ssh_key",
         "arguments_length": [1, 4],
         "arguments": ["--name", "--project-type"]
+    },
+    {
+        "name": "install_project",
+        "arguments_length": [0],
+        "arguments": [0]
     }
 ]
 
@@ -21,8 +26,7 @@ def handle_parameters_errors(cli_command, arguments_data):
             if(argument not in arguments_data):
                 print("Error: The argument '{}' is missing".format(argument))
                 return {
-                    "success": False,
-                    "data":  arguments_data_to_object(arguments_data, command["arguments"])
+                    "success": False
                 }
         return {
             "success": True,
